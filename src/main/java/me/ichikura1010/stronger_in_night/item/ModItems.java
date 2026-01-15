@@ -1,6 +1,7 @@
 package me.ichikura1010.stronger_in_night.item;
 
 import me.ichikura1010.stronger_in_night.StrongerInNightMod;
+import me.ichikura1010.stronger_in_night.item.custom.ModArmorItem;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -20,13 +21,13 @@ public class ModItems {
             () -> new Item(new Item.Properties()));
 
     public static final RegistryObject<Item> SHADOW_HELMET = ITEMS.register("shadow_helmet",
-            () -> new ArmorItem(ModArmorMaterials.SHADOW_STONE, ArmorItem.Type.HELMET, new Item.Properties()));
+            () -> new ModArmorItem(ModArmorMaterials.SHADOW_STONE, ArmorItem.Type.HELMET, new Item.Properties()));
     public static final RegistryObject<Item> SHADOW_CHESTPLATE = ITEMS.register("shadow_chestplate",
-            () -> new ArmorItem(ModArmorMaterials.SHADOW_STONE, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
+            () -> new ModArmorItem(ModArmorMaterials.SHADOW_STONE, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
     public static final RegistryObject<Item> SHADOW_LEGGINGS = ITEMS.register("shadow_leggings",
-            () -> new ArmorItem(ModArmorMaterials.SHADOW_STONE, ArmorItem.Type.LEGGINGS, new Item.Properties()));
+            () -> new ModArmorItem(ModArmorMaterials.SHADOW_STONE, ArmorItem.Type.LEGGINGS, new Item.Properties()));
     public static final RegistryObject<Item> SHADOW_BOOTS = ITEMS.register("shadow_boots",
-            () -> new ArmorItem(ModArmorMaterials.SHADOW_STONE, ArmorItem.Type.BOOTS, new Item.Properties()));
+            () -> new ModArmorItem(ModArmorMaterials.SHADOW_STONE, ArmorItem.Type.BOOTS, new Item.Properties()));
 
 
     public static void register(IEventBus eventBus) {
