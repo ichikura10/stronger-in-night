@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_raw_shadow_stone": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "stronger_in_night:raw_shadow_stone"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "stronger_in_night:shadow_stone_ingot_from_blasting_raw_shadow_stone"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_raw_shadow_stone",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "stronger_in_night:shadow_stone_ingot_from_blasting_raw_shadow_stone"
+    ]
+  },
+  "sends_telemetry_event": false
+}

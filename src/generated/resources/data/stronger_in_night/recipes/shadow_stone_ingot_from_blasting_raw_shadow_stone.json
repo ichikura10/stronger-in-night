@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 100,
+  "experience": 0.25,
+  "group": "shadow_stone",
+  "ingredient": {
+    "item": "stronger_in_night:raw_shadow_stone"
+  },
+  "result": "stronger_in_night:shadow_stone_ingot"
+}
