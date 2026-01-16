@@ -5,6 +5,9 @@ import me.ichikura1010.stronger_in_night.item.ModArmorMaterials;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
@@ -13,6 +16,7 @@ import net.minecraft.world.level.Level;
 
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 public class ModArmorItem extends ArmorItem {
 
@@ -44,6 +48,14 @@ public class ModArmorItem extends ArmorItem {
                                     false,
                                     false,
                                     true
+                            ),
+                            new ArmorEffect(
+                                    MobEffects.DAMAGE_BOOST,
+                                    500,
+                                    0,
+                                    false,
+                                    false,
+                                    true
                             )
                     )
             );
@@ -57,7 +69,39 @@ public class ModArmorItem extends ArmorItem {
         if(!world.isClientSide()) {
             if(hasFullSuitOfArmorOn(player)) {
                 evaluateArmorEffects(player);
+                applyMaxHealthModifier(player);
             }
+            else {
+                removeMaxHealthModifier(player);
+            }
+        }
+    }
+
+    private static final UUID SHADOW_STONE_HEALTH_UUID =
+            UUID.fromString("ecd0b783-0362-4ec4-afbc-841287d7208f");
+
+    private void applyMaxHealthModifier(Player player) {
+        AttributeInstance attr = player.getAttribute(Attributes.MAX_HEALTH);
+        if (attr == null) return;
+
+        if (attr.getModifier(SHADOW_STONE_HEALTH_UUID) == null) {
+            AttributeModifier modifier = new AttributeModifier(
+                    SHADOW_STONE_HEALTH_UUID,
+                    "Shadow Stone health penalty",
+                    -8.0D,
+                    AttributeModifier.Operation.ADDITION
+            );
+            attr.addPermanentModifier(modifier);
+        }
+    }
+
+    private void removeMaxHealthModifier(Player player) {
+        AttributeInstance attr = player.getAttribute(Attributes.MAX_HEALTH);
+        if (attr == null) return;
+
+        AttributeModifier modifier = attr.getModifier(SHADOW_STONE_HEALTH_UUID);
+        if (modifier != null) {
+            attr.removeModifier(modifier);
         }
     }
 
