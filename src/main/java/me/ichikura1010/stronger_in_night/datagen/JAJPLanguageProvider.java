@@ -18,6 +18,6 @@ public class JAJPLanguageProvider extends LanguageProvider {
         addItem(ModItems.RAW_SHADOW_STONE, "影の原石");
         addItem(ModItems.SHADOW_STONE_INGOT, "影のインゴット");
 
-        add("creativetab.test_tab", "てすと");
+        add("creativetab.STRONGER_IN_NIGHT", "Stronger In Night");
     }
 }

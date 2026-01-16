@@ -19,6 +19,6 @@ public class ENUSLanguageProvider extends LanguageProvider {
         addItem(ModItems.RAW_SHADOW_STONE, "Raw Shadow Stone");
         addItem(ModItems.SHADOW_STONE_INGOT, "Shadow Stone Ingot");
 
-        add("creativetab.test_tab", "test");
+        add("creativetab.STRONGER_IN_NIGHT", "Stronger In Night");
     }
 }
