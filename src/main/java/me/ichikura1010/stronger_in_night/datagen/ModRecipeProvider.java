@@ -4,6 +4,7 @@ import me.ichikura1010.stronger_in_night.StrongerInNightMod;
 import me.ichikura1010.stronger_in_night.item.ModItems;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.AbstractCookingRecipe;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -25,6 +26,12 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
     protected void buildRecipes(Consumer<FinishedRecipe> pWriter) {
         oreSmelting(pWriter, SHADOW_STONE_SMELTABLES, RecipeCategory.MISC, ModItems.SHADOW_STONE_INGOT.get(), 0.25f, 200, "shadow_stone");
         oreBlasting(pWriter, SHADOW_STONE_SMELTABLES, RecipeCategory.MISC, ModItems.SHADOW_STONE_INGOT.get(), 0.25f, 100, "shadow_stone");
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.RAW_SHADOW_STONE.get())
+                .requires(Items.RAW_IRON)
+                .requires(Items.DIAMOND, 4)
+                .unlockedBy("has_diamond", has(Items.DIAMOND))
+                .save(pWriter);
     }
 
     protected static void oreSmelting(Consumer<FinishedRecipe> pFinishedRecipeConsumer, List<ItemLike> pIngredients, RecipeCategory pCategory, ItemLike pResult, float pExperience, int pCookingTIme, String pGroup) {
