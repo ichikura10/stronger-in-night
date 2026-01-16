@@ -19,6 +19,11 @@ public class ENUSLanguageProvider extends LanguageProvider {
         addItem(ModItems.RAW_SHADOW_STONE, "Raw Shadow Stone");
         addItem(ModItems.SHADOW_STONE_INGOT, "Shadow Stone Ingot");
 
+        addItem(ModItems.SHADOW_HELMET,"Shadow Helmet");
+        addItem(ModItems.SHADOW_CHESTPLATE,"Shadow Chestplate");
+        addItem(ModItems.SHADOW_LEGGINGS,"Shadow Leggings");
+        addItem(ModItems.SHADOW_BOOTS,"Shadow Boots");
+
         add("creativetab.STRONGER_IN_NIGHT", "Stronger In Night");
     }
 }

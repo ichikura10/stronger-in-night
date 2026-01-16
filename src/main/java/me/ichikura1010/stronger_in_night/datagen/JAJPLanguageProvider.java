@@ -18,6 +18,11 @@ public class JAJPLanguageProvider extends LanguageProvider {
         addItem(ModItems.RAW_SHADOW_STONE, "影の原石");
         addItem(ModItems.SHADOW_STONE_INGOT, "影のインゴット");
 
+        addItem(ModItems.SHADOW_HELMET,"影のヘルメット");
+        addItem(ModItems.SHADOW_CHESTPLATE,"影のチェストプレート");
+        addItem(ModItems.SHADOW_LEGGINGS,"影のレギンス");
+        addItem(ModItems.SHADOW_BOOTS,"影のブーツ");
+
         add("creativetab.STRONGER_IN_NIGHT", "Stronger In Night");
     }
 }
