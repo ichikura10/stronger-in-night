@@ -15,7 +15,7 @@ import java.util.Map;
 public class ModArmorItem extends ArmorItem {
     private static final Map<ArmorMaterial, MobEffectInstance> MATERIAL_TO_EFFECT_MAP =
             (new ImmutableMap.Builder<ArmorMaterial, MobEffectInstance>())
-                    .put(ModArmorMaterials.SHADOW_STONE, new MobEffectInstance(MobEffects.NIGHT_VISION, 200, 1,
+                    .put(ModArmorMaterials.SHADOW_STONE, new MobEffectInstance(MobEffects.NIGHT_VISION, 500, 1,
                             false,false, true)).build();
 
     public ModArmorItem(ArmorMaterial pMaterial, Type pType, Properties pProperties) {
@@ -42,12 +42,18 @@ public class ModArmorItem extends ArmorItem {
         }
     }
 
+    private boolean isNight(Level level) {
+        long time = level.getDayTime() % 24000;
+        return time >= 13000 && time <= 23000;
+    }
+
     private void addStatusEffectForMaterial(Player player, ArmorMaterial mapArmorMaterial,
                                             MobEffectInstance mapStatusEffect) {
-        boolean hasPlayerEffect = player.hasEffect(mapStatusEffect.getEffect());
 
-        if(hasCorrectArmorOn(mapArmorMaterial, player) && !hasPlayerEffect) {
-            player.addEffect(new MobEffectInstance(mapStatusEffect));
+        if ((player.getEffect(MobEffects.NIGHT_VISION) == null) || (player.getEffect(MobEffects.NIGHT_VISION).getDuration() <= 300)) {
+            if (isNight(player.level())) {
+                player.addEffect(new MobEffectInstance(mapStatusEffect));
+            }
         }
     }
 
