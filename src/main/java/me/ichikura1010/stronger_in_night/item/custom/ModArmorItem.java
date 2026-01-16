@@ -44,7 +44,7 @@ public class ModArmorItem extends ArmorItem {
                             new ArmorEffect(
                                     MobEffects.MOVEMENT_SPEED,
                                     500,
-                                    0,
+                                    1,
                                     false,
                                     false,
                                     true
@@ -88,7 +88,7 @@ public class ModArmorItem extends ArmorItem {
             AttributeModifier modifier = new AttributeModifier(
                     SHADOW_STONE_HEALTH_UUID,
                     "Shadow Stone health penalty",
-                    -8.0D,
+                    -4.0D,
                     AttributeModifier.Operation.ADDITION
             );
             attr.addPermanentModifier(modifier);
