@@ -13,7 +13,7 @@ public class ModCreativeModTabs {
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS =
             DeferredRegister.create(Registries.CREATIVE_MODE_TAB, StrongerInNightMod.MOD_ID);
 
-    public static final RegistryObject<CreativeModeTab> STRONGE_IN_NIGHT = CREATIVE_MODE_TABS.register("stronger_in_night",
+    public static final RegistryObject<CreativeModeTab> STRONGER_IN_NIGHT = CREATIVE_MODE_TABS.register("stronger_in_night",
             () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModItems.RAW_SHADOW_STONE.get()))
                     .title(Component.translatable("creativetab.STRONGER_IN_NIGHT"))
                     .displayItems((pParameters, pOutput) -> {
