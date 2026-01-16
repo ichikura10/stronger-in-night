@@ -2,6 +2,7 @@ package me.ichikura1010.stronger_in_night.item.custom;
 
 import com.google.common.collect.ImmutableMap;
 import me.ichikura1010.stronger_in_night.item.ModArmorMaterials;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
@@ -10,13 +11,42 @@ import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
+import java.util.List;
 import java.util.Map;
 
 public class ModArmorItem extends ArmorItem {
-    private static final Map<ArmorMaterial, MobEffectInstance> MATERIAL_TO_EFFECT_MAP =
-            (new ImmutableMap.Builder<ArmorMaterial, MobEffectInstance>())
-                    .put(ModArmorMaterials.SHADOW_STONE, new MobEffectInstance(MobEffects.NIGHT_VISION, 500, 1,
-                            false,false, true)).build();
+
+    public record ArmorEffect(
+            MobEffect effect,
+            int duration,
+            int amplifier,
+            boolean ambient,
+            boolean visible,
+            boolean showIcon
+    ) {}
+
+    private static final Map<ArmorMaterial, List<ArmorEffect>> MATERIAL_TO_EFFECT_MAP =
+            ImmutableMap.of(
+                    ModArmorMaterials.SHADOW_STONE,
+                    List.of(
+                            new ArmorEffect(
+                                    MobEffects.NIGHT_VISION,
+                                    500,
+                                    0,
+                                    false,
+                                    false,
+                                    true
+                            ),
+                            new ArmorEffect(
+                                    MobEffects.MOVEMENT_SPEED,
+                                    500,
+                                    0,
+                                    false,
+                                    false,
+                                    true
+                            )
+                    )
+            );
 
     public ModArmorItem(ArmorMaterial pMaterial, Type pType, Properties pProperties) {
         super(pMaterial, pType, pProperties);
@@ -32,12 +62,14 @@ public class ModArmorItem extends ArmorItem {
     }
 
     private void evaluateArmorEffects(Player player) {
-        for (Map.Entry<ArmorMaterial, MobEffectInstance> entry : MATERIAL_TO_EFFECT_MAP.entrySet()) {
-            ArmorMaterial mapArmorMaterial = entry.getKey();
-            MobEffectInstance mapStatusEffect = entry.getValue();
+        for (Map.Entry<ArmorMaterial, List<ArmorEffect>> entry
+                : MATERIAL_TO_EFFECT_MAP.entrySet()) {
 
-            if(hasCorrectArmorOn(mapArmorMaterial, player)) {
-                addStatusEffectForMaterial(player, mapArmorMaterial, mapStatusEffect);
+            ArmorMaterial material = entry.getKey();
+            List<ArmorEffect> effects = entry.getValue();
+
+            if (hasCorrectArmorOn(material, player)) {
+                applyArmorEffects(player, effects);
             }
         }
     }
@@ -47,12 +79,22 @@ public class ModArmorItem extends ArmorItem {
         return time >= 13000 && time <= 23000;
     }
 
-    private void addStatusEffectForMaterial(Player player, ArmorMaterial mapArmorMaterial,
-                                            MobEffectInstance mapStatusEffect) {
+    private void applyArmorEffects(Player player, List<ArmorEffect> effects) {
+        if (!isNight(player.level())) return;
 
-        if ((player.getEffect(MobEffects.NIGHT_VISION) == null) || (player.getEffect(MobEffects.NIGHT_VISION).getDuration() <= 300)) {
-            if (isNight(player.level())) {
-                player.addEffect(new MobEffectInstance(mapStatusEffect));
+        for (ArmorEffect e : effects) {
+            MobEffectInstance current = player.getEffect(e.effect());
+
+            // 効果がない or 残り15秒以下
+            if (current == null || current.getDuration() <= 300) {
+                player.addEffect(new MobEffectInstance(
+                        e.effect(),
+                        e.duration(),
+                        e.amplifier(),
+                        e.ambient(),
+                        e.visible(),
+                        e.showIcon()
+                ));
             }
         }
     }
