@@ -73,9 +73,21 @@ public class ModArmorItem extends ArmorItem {
             }
             else {
                 removeMaxHealthModifier(player);
+                removeArmorEffects(player);
             }
         }
     }
+
+    private void removeArmorEffects(Player player) {
+        for (List<ArmorEffect> effects : MATERIAL_TO_EFFECT_MAP.values()) {
+            for (ArmorEffect effect : effects) {
+                if (player.hasEffect(effect.effect())) {
+                    player.removeEffect(effect.effect());
+                }
+            }
+        }
+    }
+
 
     private static final UUID SHADOW_STONE_HEALTH_UUID =
             UUID.fromString("ecd0b783-0362-4ec4-afbc-841287d7208f");
