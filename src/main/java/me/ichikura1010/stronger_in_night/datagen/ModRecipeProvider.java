@@ -32,6 +32,36 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .requires(Items.DIAMOND, 4)
                 .unlockedBy("has_diamond", has(Items.DIAMOND))
                 .save(pWriter);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.SHADOW_HELMET.get())
+                .pattern("SSS")
+                .pattern("S S")
+                .define('S', ModItems.SHADOW_STONE_INGOT.get())
+                .unlockedBy(getHasName(ModItems.SHADOW_STONE_INGOT.get()), has(ModItems.SHADOW_STONE_INGOT.get()))
+                .save(pWriter);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.SHADOW_CHESTPLATE.get())
+                .pattern("S S")
+                .pattern("SSS")
+                .pattern("SSS")
+                .define('S', ModItems.SHADOW_STONE_INGOT.get())
+                .unlockedBy(getHasName(ModItems.SHADOW_STONE_INGOT.get()), has(ModItems.SHADOW_STONE_INGOT.get()))
+                .save(pWriter);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.SHADOW_LEGGINGS.get())
+                .pattern("SSS")
+                .pattern("S S")
+                .pattern("S S")
+                .define('S', ModItems.SHADOW_STONE_INGOT.get())
+                .unlockedBy(getHasName(ModItems.SHADOW_STONE_INGOT.get()), has(ModItems.SHADOW_STONE_INGOT.get()))
+                .save(pWriter);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.SHADOW_BOOTS.get())
+                .pattern("S S")
+                .pattern("S S")
+                .define('S', ModItems.SHADOW_STONE_INGOT.get())
+                .unlockedBy(getHasName(ModItems.SHADOW_STONE_INGOT.get()), has(ModItems.SHADOW_STONE_INGOT.get()))
+                .save(pWriter);
     }
 
     protected static void oreSmelting(Consumer<FinishedRecipe> pFinishedRecipeConsumer, List<ItemLike> pIngredients, RecipeCategory pCategory, ItemLike pResult, float pExperience, int pCookingTIme, String pGroup) {

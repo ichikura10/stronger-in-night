@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "S": {
+      "item": "stronger_in_night:shadow_stone_ingot"
+    }
+  },
+  "pattern": [
+    "SSS",
+    "S S"
+  ],
+  "result": {
+    "item": "stronger_in_night:shadow_helmet"
+  },
+  "show_notification": true
+}
